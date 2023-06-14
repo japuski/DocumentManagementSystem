@@ -1,0 +1,100 @@
+<h2>Zapisz fakturę</h2>
+
+{{invoiceForm.get('invoiceNumber')?.value}}
+{{invoiceForm.get('Quantity_0')?.value}}
+{{invoiceForm.get('Quantity_1')?.value}}
+{{invoiceForm.get('Quantity_2')?.value}}
+{{invoiceForm.get('Quantity_3')?.value}}
+{{invoiceForm.get('Quantity_4')?.value}}
+{{invoiceForm.get('ProductName_0')?.value}}
+{{invoiceForm.get('ProductName_1')?.value}}
+{{invoiceForm.get('ProductName_2')?.value}}
+{{invoiceForm.get('ProductName_3')?.value}}
+{{invoiceForm.get('ProductName_4')?.value}}
+
+<form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">
+
+
+  <div>
+    <p style="text-decoration: underline;">Dane faktury:</p>
+    <table>
+      <tr>
+        <th>Numer faktury</th>
+        <th>Data wystawienia</th>
+        <th>Data sprzedaży</th>
+      </tr>
+      <tr>
+        <th><input type="text" id="invoiceNumber" formControlName="invoiceNumber"></th>
+        <th><input type="text" id="dateOfIssue" formControlName="dateOfIssue"></th>
+        <th><input type="text" id="dateOfSale" formControlName="dateOfSale"></th>
+      </tr>
+    </table>
+  </div>
+
+  <hr />
+
+  <div>
+    <p style="text-decoration: underline;">Dane nabywcy/sprzedawcy:</p>
+    <table>
+      <tr>
+        <th>Strona</th>
+        <th>Nazwa</th>
+        <th>NIP</th>
+        <th>Ulica</th>
+        <th>Numer</th>
+        <th>Kod Pocztowy</th>
+        <th>Miasto</th>
+      </tr>
+      <tr>
+        <th>Nabywca</th>
+        <th><input type="text" id="buyerName" formControlName="buyerName"></th>
+        <th><input type="text" id="buyerNip" formControlName="buyerNip"></th>
+        <th><input type="text" id="buyerStreet" formControlName="buyerStreet"></th>
+        <th><input type="text" id="buyerNumber" formControlName="buyerNumber"></th>
+        <th><input type="text" id="buyerPostalCode" formControlName="buyerPostalCode"></th>
+        <th><input type="text" id="buyerCity" formControlName="buyerCity"></th>
+      </tr>
+      <tr>
+        <th>Sprzedawca</th>
+        <th><input type="text" id="sellerName" formControlName="sellerName"></th>
+        <th><input type="text" id="sellerNip" formControlName="sellerNip"></th>
+        <th><input type="text" id="sellerStreet" formControlName="sellerStreet" /></th>
+        <th><input type="text" id="sellerNumber" formControlName="sellerNumber"></th>
+        <th><input type="text" id="sellerPostalCode" formControlName="sellerPostalCode"></th>
+        <th><input type="text" id="sellerCity" formControlName="sellerCity"></th>
+      </tr>
+    </table>
+  </div>
+
+  <hr />
+
+  <div>
+    <p style="text-decoration: underline;">Dane segmentów:</p>
+    <table>
+      <tr>
+        <th>Lp.</th>
+        <th>Nazwa produktu</th>
+        <th>Ilość</th>
+        <th>PKWiU</th>
+        <th>Jednostka</th>
+        <th>Cena Netto</th>
+        <th>VAT</th>
+      </tr>
+      <tr *ngFor="let segment of segmentList, let i = index">
+        <th>{{i + 1}}</th>
+        <th><input type="text" id="{{'productName_'+i}}" formControlName="{{'productName_'+i}}" placeholder="{{ segment.product.productName }}"></th>
+        <th><input type="text" id="{{'quantity_'+i}}" formControlName="{{'quantity_'+i}}" placeholder="{{ segment.quantity }}"></th>
+        <th><input type="text" id="{{'pkwiu_'+i}}" formControlName="{{'pkwiu_'+i}}" placeholder="{{ segment.product.pkwiu }}"></th>
+        <th><input type="text" id="{{'unit_'+i}}" formControlName="{{'unit_'+i}}" placeholder="{{ segment.product.unit }}"></th>
+        <th><input type="text" id="{{'nettoPrice_'+i}}" formControlName="{{'nettoPrice_'+i}}" placeholder="{{ segment.product.nettoPrice }}"></th>
+        <th><input type="text" id="{{'taxRate_'+i}}" formControlName="{{'taxRate_'+i}}" placeholder="{{ segment.product.taxRate }}"></th>
+        <th><button (click)="removeSegment(i)">Usuń segment</button></th>
+      </tr>
+    </table>
+    <br />
+    <button type="button" (click)="addProduct()">Dodaj Segment</button>
+  </div>
+  <br />
+  <input type="submit" value="Zapisz fakturę">
+
+</form>
