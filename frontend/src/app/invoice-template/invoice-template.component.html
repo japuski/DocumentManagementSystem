@@ -1,0 +1,124 @@
+
+  <div class="container">
+    <!-- 1 poziom -->
+    <div class="header">
+
+      <h1>Faktura</h1>
+
+      <div class="invoice-details">
+
+        <div>{{invoiceForm.get('invoiceNumber')?.value}}</div>
+        <div>{{invoiceForm.get('invoiceType')?.value}}</div>
+        <div>
+            Data wystawienia:
+            {{invoiceForm.get('dateOfIssue')?.value.getDate() }}.
+            {{invoiceForm.get('dateOfIssue')?.value.getMonth() + 1 }}.
+            {{invoiceForm.get('dateOfIssue')?.value.getFullYear()}}
+        </div>
+        <div>
+          Data sprzedaży:
+          {{invoiceForm.get('dateOfSale')?.value.getDate() }}.
+          {{invoiceForm.get('dateOfSale')?.value.getMonth() + 1 }}.
+          {{invoiceForm.get('dateOfSale')?.value.getFullYear()}}
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 2 poziom -->
+    <div class="seller-buyer">
+      <div class="seller">
+        <h2>Sprzedawca</h2>
+        <div>Nazwa: {{invoiceForm.get('sellerName')?.value}}</div>
+        <div>
+          Adres:
+          {{invoiceForm.get('sellerStreet')?.value}}
+          {{invoiceForm.get('sellerNumber')?.value}}
+          {{invoiceForm.get('sellerPostalCode')?.value}}
+          {{invoiceForm.get('sellerCity')?.value}}
+        </div>
+        <div>NIP: {{invoiceForm.get('sellerNip')?.value}}</div>
+      </div>
+      <div class="buyer">
+        <h2>Nabywca</h2>
+        <div>Nazwa: {{invoiceForm.get('buyerName')?.value}}</div>
+        <div>
+          Adres:
+          {{invoiceForm.get('buyerStreet')?.value}}
+          {{invoiceForm.get('buyerNumber')?.value}}
+          {{invoiceForm.get('buyerPostalCode')?.value}}
+          {{invoiceForm.get('buyerCity')?.value}}
+        </div>
+        <div>NIP: {{invoiceForm.get('buyerNip')?.value}}</div>
+      </div>
+    </div>
+
+    <!-- 3 poziom -->
+    <div class="products">
+      <h2>Lista produktów</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Lp.</th>
+            <th>Nazwa</th>
+            <th>Ilość</th>
+            <th>J.m.</th>
+            <th>Cena netto</th>
+            <th>Wartość netto</th>
+            <th>Stawka VAT</th>
+            <th>Kwota VAT</th>
+            <th>Wartość brutto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Tutaj można umieścić dynamicznie generowane wiersze dla każdego produktu -->
+          <tr>
+            <td>1</td>
+            <td>Produkt 1</td>
+            <td>1</td>
+            <td>szt.</td>
+            <td>100.00</td>
+            <td>100.00</td>
+            <td>23%</td>
+            <td>23.00</td>
+            <td>123.00</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 4 poziom -->
+    <div class="payment-summary">
+      <div class="payment-details">
+        <h2>Dane do płatności:</h2>
+        <div>Sposób płatności: {{invoiceForm.get('paymentMethod')?.value}}</div>
+        <div>
+          Termin płatności:
+          {{invoiceForm.get('paymentDeadline')?.value.getDate() }}.
+          {{invoiceForm.get('paymentDeadline')?.value.getMonth() + 1 }}.
+          {{invoiceForm.get('paymentDeadline')?.value.getFullYear()}}
+        </div>
+        <div>Numer konta: {{invoiceForm.get('accountNumber')?.value}}</div>
+        <div>Bank: {{invoiceForm.get('bank')?.value}}</div>
+        <div>Uwagi do przelewu: {{invoiceForm.get('transferComment')?.value}}</div>
+      </div>
+      <div class="summary">
+        <h2>Podsumowanie</h2>
+        <div>Razem do zapłaty: </div>
+        <div>Zapłacono: {{invoiceForm.get('amountPaid')?.value}}</div>
+        <div>Pozostało do zapłaty: </div>
+      </div>
+    </div>
+
+    <!-- 5 poziom -->
+    <div class="signatures">
+      <div class="seller-signature">
+        <h2>Podpis wystawcy</h2>
+        <!-- Pole na podpis wystawcy -->
+      </div>
+      <div class="buyer-signature">
+        <h2>Podpis nabywcy</h2>
+        <!-- Pole na podpis nabywcy -->
+      </div>
+    </div>
+  </div>

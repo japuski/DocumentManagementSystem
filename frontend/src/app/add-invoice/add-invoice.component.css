@@ -1,0 +1,39 @@
+form {
+  max-width: 100%;
+  padding: 15px;
+}
+
+.form-container {
+  display: flex;
+}
+
+.left-side {
+  flex: 1;
+  padding: 10px;
+}
+
+.right-side {
+  flex: 1;
+  padding: 20px;
+  border-left: 1px solid #ccc; /* Dodatkowa linia oddzielająca lewą i prawą stronę */
+}
+
+.sides {
+  display: flex;
+}
+
+.buyer {
+  flex: 1;
+  padding: 10px;
+}
+
+.seller {
+  border: 1px;
+  flex: 1;
+  padding: 10px;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+}

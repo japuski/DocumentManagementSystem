@@ -1,0 +1,171 @@
+<p>add-invoice2 works!</p>
+
+
+<form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()" class="addInvoiceView">
+  <h2>Utwórz fakturę:</h2>
+  <div class="form">
+    <div>
+      <table>
+        <tr>
+          <th>Numer faktury</th>
+          <th>Typ faktury</th>
+          <th>Data wystawienia</th>
+          <th>Data sprzedaży</th>
+          <th>Waluta</th>
+          <th>Termin płatności</th>
+          <th>Sposób płatności</th>
+          <th>Numer konta</th>
+          <th>Bank</th>
+          <th>Uwagi do płatności</th>
+          <th>Zapłacono</th>
+        </tr>
+        <tr>
+          <th><input type="text" id="invoiceNumber" formControlName="invoiceNumber"></th>
+          <th><input type="text" id="invoiceType" formControlName="invoiceType"></th>
+          <th><input type="date" id="dateOfIssue" formControlName="dateOfIssue"></th>
+          <th><input type="date" id="dateOfSale" formControlName="dateOfSale"></th>
+          <th><input type="text" id="currency" formControlName="currency"></th>
+          <th><input type="date" id="paymentDeadline" formControlName="paymentDeadline"></th>
+          <th><input type="text" id="paymentMethod" formControlName="paymentMethod"></th>
+          <th><input type="text" id="accountNumber" formControlName="accountNumber"></th>
+          <th><input type="text" id="bank" formControlName="bank"></th>
+          <th><input type="text" id="transferComment" formControlName="transferComment"></th>
+          <th><input type="number" id="amountPaid" formControlName="amountPaid"></th>
+        </tr>
+      </table>
+    </div>
+
+    <hr />
+
+    <div>
+      <p style="text-decoration: underline;">Dane nabywcy/sprzedawcy:</p>
+      <table>
+        <tr>
+          <th>Strona</th>
+          <th>Nazwa</th>
+          <th>NIP</th>
+          <th>Ulica</th>
+          <th>Numer</th>
+          <th>Kod Pocztowy</th>
+          <th>Miasto</th>
+        </tr>
+        <tr>
+          <th>Nabywca</th>
+          <th><input type="text" id="buyerName" formControlName="buyerName"></th>
+          <th><input type="text" id="buyerNip" formControlName="buyerNip"></th>
+          <th><input type="text" id="buyerStreet" formControlName="buyerStreet"></th>
+          <th><input type="text" id="buyerNumber" formControlName="buyerNumber"></th>
+          <th><input type="text" id="buyerPostalCode" formControlName="buyerPostalCode"></th>
+          <th><input type="text" id="buyerCity" formControlName="buyerCity"></th>
+        </tr>
+        <tr>
+          <th>Sprzedawca</th>
+          <th><input type="text" id="sellerName" formControlName="sellerName"></th>
+          <th><input type="text" id="sellerNip" formControlName="sellerNip"></th>
+          <th><input type="text" id="sellerStreet" formControlName="sellerStreet" /></th>
+          <th><input type="text" id="sellerNumber" formControlName="sellerNumber"></th>
+          <th><input type="text" id="sellerPostalCode" formControlName="sellerPostalCode"></th>
+          <th><input type="text" id="sellerCity" formControlName="sellerCity"></th>
+        </tr>
+      </table>
+    </div>
+
+    <hr />
+
+    <div>
+      <p style="text-decoration: underline;">Dane segmentów:</p>
+      <table>
+        <tr>
+          <th>Lp.</th>
+          <th>Nazwa produktu</th>
+          <th>Ilość</th>
+          <th>Jednostka</th>
+          <th>Cena Netto</th>
+          <th>VAT</th>
+        </tr>
+        <tr *ngFor="let segment of segmentList, let i = index">
+          <th>{{i + 1}}</th>
+          <th><input type="text" id="{{'productName_'+i}}" formControlName="{{'productName_'+i}}" placeholder="{{ segment.product.productName }}"></th>
+          <th><input type="number" id="{{'quantity_'+i}}" formControlName="{{'quantity_'+i}}" placeholder="{{ segment.quantity }}"></th>
+          <th><input type="text" id="{{'unit_'+i}}" formControlName="{{'unit_'+i}}" placeholder="{{ segment.product.unit }}"></th>
+          <th><input type="number" id="{{'netPrice_'+i}}" formControlName="{{'netPrice_'+i}}" placeholder="{{ segment.product.netPrice }}"></th>
+          <th><input type="number" id="{{'vatRate_'+i}}" formControlName="{{'vatRate_'+i}}" placeholder="{{ segment.product.vatRate }}"></th>
+          <th><button (click)="removeSegment(i)">Usuń segment</button></th>
+        </tr>
+      </table>
+      <br />
+      <button type="button" (click)="addProduct()">Dodaj Segment</button>
+    </div>
+  </div>
+
+  <div class="options">
+    <input type="submit" value="Zapisz">
+    <button>Generuj</button>
+  </div>
+
+</form>
+
+
+<div class="listOfInvoicesView">
+
+  <h2>Lista Faktur:</h2>
+
+  <div class="dataOperations">
+    <button>Filtruj</button>
+    <button>Sortuj</button>
+  </div>
+
+  <table>
+    <tr *ngFor="let number of invoiceNumbers">
+      {{ number }}
+    </tr>
+  </table>
+
+  <div>
+    <input type="number" list="invoices" [(ngModel)]="inputInvoiceValue1" class="custom-number-input">
+
+    <datalist id="invoices">
+      <option *ngFor="let number of invoiceNumbers" value="{{ number }}">
+    </datalist>
+
+    <button type="button" (click)="generateInvoice(inputInvoiceValue1)">Generuj</button>
+  </div>
+
+  <div>
+    <input type="number" list="invoices" [(ngModel)]="inputInvoiceValue2" class="custom-number-input">
+
+    <datalist id="invoices">
+      <option *ngFor="let number of invoiceNumbers" value="{{ number }}">
+    </datalist>
+
+    <button type="button" (click)="getInvoiceJSON(inputInvoiceValue2)">Pobierz JSON</button>
+    <p *ngIf="invoice">Number: {{ invoice | json }}</p>
+  </div>
+
+  <div>
+    <input type="number" list="invoices" [(ngModel)]="inputInvoiceValue3" class="custom-number-input">
+
+    <datalist id="invoices">
+      <option *ngFor="let number of invoiceNumbers" value="{{ number }}">
+    </datalist>
+
+    <button type="button" (click)="getInvoiceFile(inputInvoiceValue3)">Pobierz plik</button>
+  </div>
+
+
+</div>
+
+
+
+
+{{invoiceForm.get('invoiceNumber')?.value}}
+{{invoiceForm.get('Quantity_0')?.value}}
+{{invoiceForm.get('Quantity_1')?.value}}
+{{invoiceForm.get('Quantity_2')?.value}}
+{{invoiceForm.get('Quantity_3')?.value}}
+{{invoiceForm.get('Quantity_4')?.value}}
+{{invoiceForm.get('ProductName_0')?.value}}
+{{invoiceForm.get('ProductName_1')?.value}}
+{{invoiceForm.get('ProductName_2')?.value}}
+{{invoiceForm.get('ProductName_3')?.value}}
+{{invoiceForm.get('ProductName_4')?.value}}

@@ -1,0 +1,9 @@
+.list {
+  display: flex;
+}
+
+.invoiceRow {
+  float: left;
+  border-style: solid;
+  margin: 1px;
+}

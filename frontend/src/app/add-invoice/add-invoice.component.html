@@ -1,0 +1,214 @@
+<!-- invoice-form.component.html -->
+
+<div class="form-container">
+
+  
+  <!-- Lewa strona z danymi do wprowadzenia -->
+  <div class="left-side">
+
+    <div class="form-row">
+      <p style="text-decoration: underline;">Dodaj fakturę:</p>
+    </div>
+
+    <form [formGroup]="invoiceForm" (ngSubmit)="onSave()">
+
+      <mat-card>
+        <div class="form-row">
+          <mat-form-field>
+            <mat-label>Typ faktury</mat-label>
+            <mat-select formControlName="invoiceType" required>
+              <mat-option value="faktura-vat">Faktura VAT</mat-option>
+              <mat-option value="faktura-proforma">Faktura Proforma</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Nazwa faktury</mat-label>
+            <input matInput formControlName="invoiceNumber" required>
+          </mat-form-field>
+        </div>
+
+
+        <div class="form-row">
+
+          <mat-form-field>
+            <mat-label>Data wystawienia</mat-label>
+            <input matInput [matDatepicker]="dateOfIssuePicker" formControlName="dateOfIssue" required>
+            <mat-datepicker-toggle matSuffix [for]="dateOfIssuePicker"></mat-datepicker-toggle>
+            <mat-datepicker #dateOfIssuePicker></mat-datepicker>
+          </mat-form-field>
+
+
+          <mat-form-field>
+            <mat-label>Data sprzedaży</mat-label>
+            <input matInput [matDatepicker]="dateOfSalePicker" formControlName="dateOfSale" required>
+            <mat-datepicker-toggle matSuffix [for]="dateOfSalePicker"></mat-datepicker-toggle>
+            <mat-datepicker #dateOfSalePicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+
+        <div class="form-row">
+          <mat-form-field>
+            <mat-label>Waluta</mat-label>
+            <input matInput formControlName="currency" required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Sposób płatności</mat-label>
+            <input matInput formControlName="paymentMethod" required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Termin płatności</mat-label>
+            <input matInput [matDatepicker]="paymentDeadlinePicker" formControlName="paymentDeadline" required>
+            <mat-datepicker-toggle matSuffix [for]="paymentDeadlinePicker"></mat-datepicker-toggle>
+            <mat-datepicker #paymentDeadlinePicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+
+        <div class="form-row">
+          <mat-form-field>
+            <mat-label>Numer konta</mat-label>
+            <input matInput formControlName="accountNumber" required>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Bank</mat-label>
+            <input matInput formControlName="bank" required>
+          </mat-form-field>
+        </div>
+
+
+        <div class="form-row">
+          <mat-form-field>
+            <mat-label>Zapłacono</mat-label>
+            <input type="number" matInput formControlName="amountPaid" required>
+          </mat-form-field>
+        </div>
+
+
+        <div class="form-row">
+          <mat-form-field>
+            <mat-label>Uwagi do płatności</mat-label>
+            <input matInput formControlName="transferComment" required>
+          </mat-form-field>
+        </div>
+      </mat-card>
+
+      <!-- Dane nabywcy/sprzedawcy -->
+
+      <div class="form-row">
+        <p style="text-decoration: underline;">Dane nabywcy/sprzedawcy:</p>
+      </div>
+
+
+      <div class="sides">
+        <!-- Nabywca -->
+        <mat-card>
+          <div class="buyer">
+            <div class="form-row">
+              <p style="text-decoration: underline;">Nabywca:</p>
+            </div>
+
+            <div class="form-row">
+              <mat-form-field>
+                <mat-label>Nazwa</mat-label>
+                <input matInput formControlName="buyerName" required>
+              </mat-form-field>
+            </div>
+
+            <div class="form-row">
+              <mat-form-field>
+                <mat-label>NIP</mat-label>
+                <input matInput formControlName="buyerNip" required>
+              </mat-form-field>
+            </div>
+
+            <div class="form-row">
+              <mat-form-field>
+                <mat-label>Ulica</mat-label>
+                <input matInput formControlName="buyerStreet" required>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Numer</mat-label>
+                <input matInput formControlName="buyerNumber" required>
+              </mat-form-field>
+            </div>
+
+            <div class="form-row">
+              <mat-form-field>
+                <mat-label>Kod pocztowy</mat-label>
+                <input matInput formControlName="buyerPostalCode" required>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Miasto</mat-label>
+                <input matInput formControlName="buyerCity" required>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card>
+
+        <!-- Sprzedawca -->
+        <mat-card>
+          <div class="seller">
+            <div class="form-row">
+              <p style="text-decoration: underline;">Sprzedawca:</p>
+            </div>
+
+            <div class="form-row">
+              <mat-form-field>
+                <mat-label>Nazwa</mat-label>
+                <input matInput formControlName="sellerName" required>
+              </mat-form-field>
+            </div>
+
+            <div class="form-row">
+              <mat-form-field>
+                <mat-label>NIP</mat-label>
+                <input matInput formControlName="sellerNip" required>
+              </mat-form-field>
+            </div>
+
+            <div class="form-row">
+              <mat-form-field>
+                <mat-label>Ulica</mat-label>
+                <input matInput formControlName="sellerStreet" required>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Numer</mat-label>
+                <input matInput formControlName="sellerNumber" required>
+              </mat-form-field>
+            </div>
+
+            <div class="form-row">
+              <mat-form-field>
+                <mat-label>Kod pocztowy</mat-label>
+                <input matInput formControlName="sellerPostalCode" required>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Miasto</mat-label>
+                <input matInput formControlName="sellerCity" required>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+
+
+
+      <!-- Dodaj pozostałe pola formularza zgodnie z powyższym wzorcem -->
+
+      <button mat-raised-button color="accent" type="submit">Generuj</button>
+      <button mat-raised-button color="accent" type="submit">Zapisz</button> <!--dostępne po zalogowaniu-->
+      <button mat-raised-button color="accent" type="submit">Zapisz i generuj</button> <!--dostępne po zalogowaniu-->
+
+    </form>
+  </div>
+
+  <!-- Prawa strona z oknem do wyświetlania danych -->
+  <div class="right-side">
+    <!-- Invocie Template -->
+
+    <app-invoice-template [invoiceForm]="invoiceForm"></app-invoice-template>
+  </div>
+</div>
+
+

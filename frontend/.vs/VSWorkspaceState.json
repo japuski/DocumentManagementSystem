@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\add-invoice",
+    "\\src\\app\\add-invoice2\\Models",
+    "\\src\\app\\add-invoice2\\Service",
+    "\\src\\app\\invoice-list\\Models",
+    "\\src\\app\\invoice-list\\Service",
+    "\\src\\app\\invoice-template"
+  ],
+  "SelectedNode": "\\src\\app\\add-invoice\\add-invoice.component.ts",
+  "PreviewInSolutionExplorer": false
+}
