@@ -2,6 +2,7 @@ package com.example.DocumentManagementSystem.service.invoiceGenerator;
 
 import com.example.DocumentManagementSystem.dto.InvoiceDto;
 import com.example.DocumentManagementSystem.dto.PersonDto;
+import com.example.DocumentManagementSystem.exception.InvoiceTemplateNotFoundException;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.jasperreports.engine.*;
@@ -45,7 +46,7 @@ public class InvoiceGeneratorJasper {
             return new FileInputStream("src/main/resources/templates/inovice_s2.jrxml");
         };
 
-        throw new RuntimeException("File Template hasn't found");
+        throw new InvoiceTemplateNotFoundException("Invoice template not found");
     }
 
 
@@ -62,7 +63,5 @@ public class InvoiceGeneratorJasper {
         }
         return byteArrayOutputStream.toByteArray();
     }
-
-    // private String numbersToWords(Big Decimal number) { }
 
 }

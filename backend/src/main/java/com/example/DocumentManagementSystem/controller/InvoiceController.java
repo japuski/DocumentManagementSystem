@@ -23,6 +23,8 @@ public class InvoiceController {
 
     private final InvoiceService invoiceService;
 
+    //Security logowanie (tabele user, userType, klucz obcy w invoice do user)
+
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/addInvoice")
     public void addInvoice(@RequestBody @Valid InvoiceDto invoiceDto) throws JRException, IOException {

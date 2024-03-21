@@ -50,7 +50,7 @@ public class InvoiceService {
 
         InvoiceFileEntity invoiceFileEntity = new InvoiceFileEntity();
         invoiceFileEntity.setFilename("FV_" + invoiceDto.getInvoiceNumber());
-        byte[] file = invoiceGenerator.generate(invoiceDto, InvoiceScheduleType.SCHEDULE1);
+        byte[] file = invoiceGenerator.generate(invoiceDto, InvoiceScheduleType.SCHEDULE3);
         invoiceFileEntity.setFile(file);
         invoiceEntity.setFile(invoiceFileEntity);
 
